@@ -1,17 +1,18 @@
-
 const EventEmitter = require('events')
-
-class MyEmitter extends EventEmitter {
+class WithLog extends EventEmitter {
+  execute(taskFunc) {
+    console.log('Before executing') // 1
+    this.emit('begin') // 3
+    taskFunc() // 5
+    this.emit('end') // 4
+    console.log('After executing') // 2
+  }
 }
+const withLog = new WithLog()
 
-const myEmitter = new MyEmitter()
+withLog.on('begin', () => console.log('About to execute')) // 3
+withLog.on('end', () => console.log('Done with execute')) // 4
 
-myEmitter.on('event', async() => {
-  console.log('an event occurred!')
+withLog.execute(() => console.log('*** Executing task ***')) // 5
 
-  throw new Error('test')
-})
-
-myEmitter.emit('event')
-
-console.log('after')
+// 1, 3, 5, 4, 2

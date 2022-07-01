@@ -1,4 +1,3 @@
-
 const EventEmitter = require('events')
 
 class MyEmitter extends EventEmitter {
@@ -6,12 +5,16 @@ class MyEmitter extends EventEmitter {
 
 const myEmitter = new MyEmitter()
 
-myEmitter.on('event', (payload) => {
+function handler(payload) {
   console.log('an event occurred!')
+}
 
-  console.log('payload', payload)
-})
+const newHandler = handler.bind(null)
 
-myEmitter.emit('event', { key: 'value'})
+myEmitter.on('event', handler)
 
-console.log('after')
+myEmitter.emit('event')
+
+myEmitter.off('event', newHandler)
+
+myEmitter.emit('event')
