@@ -1,57 +1,117 @@
-const events = new EventEmitter()
+// Кто понимает паттерн Наблюдатель Observer. Publisher - subscriber.
+// Event driven development.
 
-class User {
-  constructor(events) {
-    this.events = events;
-    this.name = 'nik',
-    this.age = 32
-  }
+// const user = {
+//   name: 'nik'
+// };
 
-  setAge(newAge) {
-    this.age = newAge
+// user.name = 'new name';
+// user.name = 'new new name'; // и т.д.
 
-    this.events.emit('user.age.updated', {
-      id: 'uuid',
-      payload: {
-        name: this.name,
-        age: this.age
-      }
-    })
-  }
-}
 
-class Gift {
-  constructor(events) {
-    this.events = events
-    this.map = new Map()
+// // Как нам следить за изменениями?
 
-    events.on('user.age.updated', this.sendBirthdayEmail.bind(this))
-    events.on('user.age.updated', this.sendBirthdayEmail.bind(this))
-  }
+// // proxy, декотораторы и прочее.
 
-  sendBirthdayEmail(data) {
-    const { user } = data.payload
-    const message = `Happy birthday ${user.name}`
+
+// function setUser(name) {
+//   user.name = name;
+
+//   // своя функция emit
+//   emit('username-change', name); // emit функция, которая публикует событие.
+// }
+
+// on('username-change', (newUser) => {
+//   console.log(newUser);
+// });
+
+// Веб-сервер как работает?
+
+
+// GET /users - HTTP послал на веб сервер.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const events = new EventEmitter();
+
+// class User {
+//   constructor(events) {
+//     this.events = events;
+//     this.name = 'nik',
+//     this.age = 32
+//   }
+
+//   setAge(newAge) {
+//     this.age = newAge
+
+//     this.events.emit('user.age.updated', {
+//       id: 'uuid',
+//       payload: {
+//         name: this.name,
+//         age: this.age
+//       }
+//     })
+//   }
+// }
+
+// class Gift {
+//   constructor(events) {
+//     this.events = events
+//     this.map = new Map()
+
+//     events.on('user.age.updated', this.sendBirthdayEmail.bind(this))
+//     events.on('user.age.updated', this.sendBirthdayEmail.bind(this))
+//   }
+
+//   sendBirthdayEmail(data) {
+//     const { user } = data.payload
+//     const message = `Happy birthday ${user.name}`
     
-    throw new Error('new error')
-  }
-}
+//     throw new Error('new error')
+//   }
+// }
 
-const user = new User(events)
-const gift = new Gift(events)
+// const user = new User(events)
+// const gift = new Gift(events)
 
-/*
-class EventEmitter
+// /*
+// class EventEmitter
 
-// База
-on(event, handler) - подписка на нужное событие
-handler(payload) - обработчик события
+// // База
+// on(event, handler) - подписка на нужное событие
+// handler(payload) - обработчик события
 
-emit(event, payload1, payload2, ...) - испускание события.
+// emit(event, payload1, payload2, ...) - испускание события.
 
-// Вспомогательные события
-once(event, payload) - подписаться но один раз.
-off(event, handler) - отписка от события.
-listeners(event) - сколько подписчиков
-maxEventListeners - по-умолчанию 10
-*/
+// // Вспомогательные события
+// once(event, payload) - подписаться но один раз.
+// off(event, handler) - отписка от события.
+// listeners(event) - сколько подписчиков
+// maxEventListeners - по-умолчанию 10
+// */

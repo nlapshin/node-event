@@ -20,6 +20,8 @@ const next = () => {
 
 process.nextTick(next)
 
+// webpack, vite
+
 
 // 1 - самый высший, а 3 - самый низший
 class Queue {

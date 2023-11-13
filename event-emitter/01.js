@@ -1,4 +1,21 @@
-const EventEmitter = require('events')
+const EventEmitter = require('events');
+
+// /*
+// class EventEmitter
+
+// // База
+// on(event, handler) - подписка на нужное событие
+// handler(payload) - обработчик события
+
+// emit(event, payload1, payload2, ...) - испускание события.
+
+// // Вспомогательные события
+// once(event, payload) - подписаться но один раз.
+// off(event, handler) - отписка от события.
+// listeners(event) - сколько подписчиков
+// maxEventListeners - по-умолчанию 10
+// */
+
 
 class MyEmitter extends EventEmitter {
 }
@@ -9,12 +26,30 @@ function handler(payload) {
   console.log('an event occurred!')
 }
 
+function handler2(payload) {
+  console.log('an event occurred 2!')
+}
+
+
 const newHandler = handler.bind(null)
 
+// Подписались
 myEmitter.on('event', handler)
+myEmitter.on('event', handler2)
 
+// for (let i = 0; i < 15; i++) {
+//   myEmitter.on('event', handler)
+// }
+
+console.log('before');
+// Опубликовали событие
 myEmitter.emit('event')
+console.log('after');
 
-myEmitter.off('event', newHandler)
+console.log(myEmitter.listeners('event'));
 
-myEmitter.emit('event')
+// // Отписались
+// myEmitter.off('event', newHandler)
+
+// // Все опубликованные уже не попадают
+// myEmitter.emit('event')
